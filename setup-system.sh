@@ -31,11 +31,13 @@ grub-install --target=x86_64-efi --bootloader-id=grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "Configuring network"
-echo '[Match]' > /etc/systemd/network/$interface.network
-echo 'Name=en*' >> /etc/systemd/network/$interface.network
-echo '' >> /etc/systemd/network/$interface.network
-echo '[Network]' >> /etc/systemd/network/$interface.network
-echo 'DHCP=yes' >> /etc/systemd/network/$interface.network
+cat > /etc/systemd/network/$interface.network << EOF
+[Match]
+Name=en*
+
+[Network]
+DHCP=yes
+EOF
 
 echo "Creating user account"
 useradd -mg users -G wheel,storage,power -s /bin/bash $username
