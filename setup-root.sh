@@ -73,7 +73,7 @@ sed "s/^MODULES=\"\"/MODULES=\"ext4\"/" /etc/mkinitcpio.conf.old | sed "/^HOOKS=
 mkinitcpio -P linux
 
 sed -i 's!quiet!quiet cryptdevice=$disk:root root=/dev/mapper/$hostname-root!' /etc/default/grub
-grub-install --efi-directory=/boot/efi --target=x86_64-efi --bootloader-id=tfarch
+grub-install --efi-directory=/boot --target=x86_64-efi --bootloader-id=tfarch
 
 useradd -mg users -G wheel,storage,power -s /bin/bash $username
 as
